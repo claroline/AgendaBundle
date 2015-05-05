@@ -10,35 +10,69 @@
 
 namespace Claroline\AgendaBundle\Installation\Updater;
 
+use Claroline\CoreBundle\Persistence\ObjectManager;
 use Claroline\InstallationBundle\Updater\Updater;
+use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\DBAL\Migrations\Configuration\Configuration;
+use Doctrine\DBAL\Migrations\Version;
 
 class MigrationUpdater extends Updater
 {
-    private $container;
-    private $om;
-
-    public function __construct(ContainerInterface $container)
+    public function preInstall(Connection $databaseConnection)
     {
-        $this->container = $container;
-        $this->om = $container->get('doctrine.orm.entity_manager');
+        if ($databaseConnection->getSchemaManager()->tablesExist(['claro_event'])) {
+            $this->log('Found existing database schema: skipping install migration...');
+            $config = new Configuration($databaseConnection);
+            $config->setMigrationsTableName('doctrine_clarolineagendabundle_versions');
+            $config->setMigrationsNamespace('claro_agenda'); // required but useless
+            $config->setMigrationsDirectory('claro_agenda'); // idem
+            $version = new Version($config, '20150429110105', 'stdClass');
+            $version->markMigrated();
+         }
     }
 
-    public function preInstall()
+    public function postInstall(ObjectManager $objectManager)
     {
-        $this->log('Updating migration versions...');
-        $conn = $this->om->getConnection();
-        $schemaManager = $conn->getSchemaManager();
-        $tables = $schemaManager->listTables();
-        $found = false;
+        /** @var \Claroline\CoreBundle\Repository\ToolRepository $toolRepository */
+        $toolRepository = $objectManager->getRepository('ClarolineCoreBundle:Tool\Tool');
 
-        foreach ($tables as $table) {
-            if ($table->getName() === 'claro_event') $found = true;
-        }
+        /** @var \Claroline\CoreBundle\Repository\PluginRepository $pluginRepository */
+        $pluginRepository = $objectManager->getRepository('ClarolineCoreBundle:Plugin');
 
-        if ($found) {
-            $this->log('Inserting migration 20150429110105');
-            $conn->query("INSERT INTO doctrine_clarolineagendabundle_versions (version) VALUES (20150429110105)");
-        }
+        $agendaToolName = 'agenda';
+
+        /** @var \Claroline\CoreBundle\Entity\Plugin $agendaPlugin */
+        $agendaPlugin = $pluginRepository->createQueryBuilder('plugin')
+            ->where('plugin.vendorName = :agendaVendorName')
+            ->andWhere('plugin.bundleName = :agendaShortName')
+            ->setParameters(['agendaVendorName' => 'Claroline', 'agendaShortName' => 'AgendaBundle'])
+            ->getQuery()
+            ->getSingleResult();
+
+        /** @var \Claroline\CoreBundle\Entity\Tool\Tool $agendaTool */
+        $agendaTool = $toolRepository->createQueryBuilder('tool')
+            ->where('tool.name = :agendaToolName')
+            ->andWhere('tool.plugin = :agendaPlugin')
+            ->setParameter('agendaToolName', $agendaToolName)
+            ->setParameter('agendaPlugin', $agendaPlugin)
+            ->getQuery()
+            ->getSingleResult();
+
+        /** @var \Claroline\CoreBundle\Entity\Tool\Tool $agendaCoreTool */
+        $agendaCoreTool = $toolRepository->createQueryBuilder('tool')
+            ->where('tool.name = :agendaToolName')
+            ->andWhere('tool.plugin is NULL')
+            ->setParameter('agendaToolName', $agendaToolName)
+            ->getQuery()
+            ->getSingleResult();
+
+        $objectManager->remove($agendaTool);
+        $objectManager->forceFlush();
+
+        $agendaCoreTool->setPlugin($agendaPlugin);
+        $objectManager->persist($agendaCoreTool);
+        $objectManager->forceFlush();
     }
 }
