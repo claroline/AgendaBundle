@@ -31,7 +31,8 @@ class AgendaType extends AbstractType
     private $om;
     private $tokenStorage;
     private $isDesktop;
-    private $guestMode = false;
+    private $guestMode;
+    private $creationMode;
 
     /**
      * @DI\InjectParams({
@@ -46,6 +47,8 @@ class AgendaType extends AbstractType
         $this->om = $om;
         $this->tokenStorage = $tokenStorage;
         $this->isDesktop = false;
+        $this->creationMode = false;
+        $this->guestMode = false;
     }
 
     public function setIsDesktop()
@@ -56,6 +59,11 @@ class AgendaType extends AbstractType
     public function setGuestMode()
     {
         $this->guestMode = true;
+    }
+
+    public function setCreationMode()
+    {
+        $this->creationMode = true;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -69,23 +77,25 @@ class AgendaType extends AbstractType
 
         if (!$this->guestMode) {
             $builder
-                ->add('isTask', 'checkbox', [
+                ->add('isTask', 'checkbox', array(
                     'label' => 'form.task',
-                    'required' => false
-                ])
-
-                ->add('isAllDay', 'checkbox', [
+                    'required' => false,
+                    'attr' => array(
+                        'data-target' => '#recurrenceButton',
+                        'aria-expanded' => "true",
+                        'aria-controls' => 'recurrenceButton'
+                    )
+                ))
+                ->add('isAllDay', 'checkbox', array(
                     'label' => 'form.all_day',
                     'required' => false
-                ])
-
-                ->add('start', 'text', [
+                ))
+                ->add('start', 'text', array(
                     'label' => 'form.start'
-                ])
-
-                ->add('end', 'text', [
+                ))
+                ->add('end', 'text', array(
                     'label' => 'form.end'
-                ])
+                ))
             ;
         }
 
@@ -125,11 +135,38 @@ class AgendaType extends AbstractType
                 ])
             ;
         }
+
+        if ($this->creationMode) {
+            $builder->add(
+                'recurrence',
+                'choice',
+                array(
+                    'label' => 'form.recurrence',
+                    'choices' => array(
+                        'd' => 'time.day',
+                        'od' => 'time.open_day',
+                        'w' => 'time.week',
+                        'tw' => 'time.two_weeks',
+                        //uncomment this when the month recurrence is done
+                        //'m' => 'time.month',
+                        'y' => 'time.year'
+                    ),
+                    'multiple' => false,
+                    'expanded' => true,
+                    'mapped' => false
+                )
+            );
+            $builder->add('endRecurrence', 'datepicker', array(
+                'label' => 'form.end_recurrence',
+                'mapped' => false
+            ));
+        }
     }
 
     public function getWorkspacesByUser()
     {
-        return $this->om->getRepository('ClarolineAgendaBundle:Event')->findEditableUserWorkspaces($this->tokenStorage->getToken()->getUser());
+        return $this->om->getRepository('ClarolineAgendaBundle:Event')
+            ->findEditableUserWorkspaces($this->tokenStorage->getToken()->getUser());
     }
 
     public function getName()

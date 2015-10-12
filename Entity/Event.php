@@ -17,11 +17,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Claroline\AgendaBundle\Validator\Constraints\DateRange;
+use Claroline\AgendaBundle\Validator\Constraints\Recurrence;
 
 /**
  * @ORM\Entity(repositoryClass="Claroline\AgendaBundle\Repository\EventRepository")
  * @ORM\Table(name="claro_event")
  * @DateRange()
+ * @Recurrence()
  */
 class Event
 {
@@ -99,6 +101,23 @@ class Event
      * @ORM\Column(name="is_editable", nullable=true, type="boolean")
      */
     private $isEditable;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="Claroline\AgendaBundle\Entity\Event",
+     *     mappedBy="parent"
+     * )
+     */
+    protected $children;
+
+    /**
+     * @ORM\ManyToOne(
+     *     targetEntity="Claroline\AgendaBundle\Entity\Event",
+     *     inversedBy="children"
+     * )
+     * @ORM\JoinColumn(onDelete="CASCADE", nullable=true)
+     */
+    protected $parent;
 
     public function __construct()
     {

@@ -78,7 +78,7 @@ class AgendaManager
         $this->container = $container;
     }
 
-    public function addEvent(Event $event, $workspace = null, array $users = [])
+    public function addEvent(Event $event, $workspace = null, array $users = [], $recurrenceType = null, $recurrenceEnd = null)
     {
         $event->setWorkspace($workspace);
         $event->setUser($this->tokenStorage->getToken()->getUser());

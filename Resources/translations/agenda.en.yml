@@ -22,6 +22,8 @@ day:
     saturday: Saturday
     sun: Sun
     sunday: Sunday
+    recurrence: Recurrence
+    end_recurrence: End recurrence
 date_agenda_display_format: MM-DD-YYYY
 date_agenda_display_format_for_form: MM-dd-yyyy
 end: end
@@ -106,3 +108,10 @@ update: modify
 update_event: Update an event
 week: Week
 workspace: Workspace
+time:
+    day: every day
+    open_day: every work day
+    week: every week
+    two_weeks: every 2 weeks
+    month: every month
+    year: every year

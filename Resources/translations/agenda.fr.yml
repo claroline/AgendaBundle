@@ -44,6 +44,8 @@ form:
   author: Créé par
   invitations: Invitations
   status: Status
+  recurrence: Récurrence
+  end_recurrence: Fin de récurrence
 high: Haute
 hide_tasks: Cacher toutes les tâches
 import_agenda_file: 'Importer'
@@ -139,3 +141,10 @@ update: Modifier
 update_event: Mettre à jour un évènement
 week: Semaine
 workspace: 'Espace d''activités'
+time:
+    day: tous les jours
+    open_day: tous les jours ouvrables
+    week: toutes les semaines
+    two_weeks: toutes les 2 semaines
+    month: tous les mois
+    year: tous les ans

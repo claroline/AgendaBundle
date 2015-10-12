@@ -10,7 +10,16 @@
               role="form"
                 >
             <div class="modal-body">
-                {{ form_widget(form) }}
+                {% if form.title is defined %} {{ form_row(form.title) }} {% endif %}
+                {% if form.isTask is defined %} {{ form_row(form.isTask) }} {% endif %}
+                {% if form.isAllDay is defined %} {{ form_row(form.isAllDay) }} {% endif %}
+                {% if form.start is defined %} {{ form_row(form.start) }} {% endif %}
+                {% if form.end is defined %} {{ form_row(form.end) }} {% endif %}
+                {% if form.workspace is defined %} {{ form_row(form.workspace) }} {% endif %}
+                {% if form.description is defined %} {{ form_row(form.description) }} {% endif %}
+                {% if form.priority is defined %} {{ form_row(form.priority) }} {% endif %}
+                {% if form.users is defined %} {{ form_row(form.users) }} {% endif %}
+                {{ form_rest(form) }}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{'cancel'|trans({}, 'agenda') }}</button>

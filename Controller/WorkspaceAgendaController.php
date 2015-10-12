@@ -139,6 +139,7 @@ class WorkspaceAgendaController extends Controller
     {
         $this->agendaManager->checkEditAccess($workspace);
         $formType = $this->get('claroline.form.agenda');
+        $formType->setCreationMode();
         $form = $this->createForm($formType, new Event());
 
         return array(
@@ -162,15 +163,16 @@ class WorkspaceAgendaController extends Controller
     {
         $this->agendaManager->checkEditAccess($workspace);
         $formType = $this->get('claroline.form.agenda');
+        $formType->setCreationMode();
         $form = $this->createForm($formType, new Event());
         $form->handleRequest($this->request);
 
         if ($form->isValid()) {
             $event = $form->getData();
-
             $users = $form->get('users')->getData();
-
-            $data = $this->agendaManager->addEvent($event, $workspace, $users);
+            $recurrenceType = $form->get('recurrence')->getData();
+            $recurrenceEnd = $form->get('endRecurrence')->getData();
+            $data = $this->agendaManager->addEvent($event, $workspace, $users, $recurrenceType, $recurrenceEnd);
 
             return new JsonResponse(array($data), 200);
         }
