@@ -1,85 +1,151 @@
+date_range_too_small: 'L''événement doit durer au moins 15 minutes.'
+agenda_: 'Upcoming events'
+agenda: Agenda
+invitation: Invitation
+agenda_task: 'Tasks to do'
+x_days_ago: '%nbDays% days ago'
+yesterday: Yesterday
+mark_task_as_done: 'Mark this task as done'
+mark_task_as_not_done: 'Mark this task as not done'
+cant_modify_task: 'You cannot modify this task'
 add_event: 'agregar un evento'
 isTask: Tarea
-cancel: 'Anular'
-close: 'Cerrar'
+all_day: 'the whole day'
+at: at
+cancel: Anular
+close: Cerrar
 confirm: 'Confirmar la modificación?'
 date_invalid: 'Ha ocurrido un error. Por favor, compruebe que su evento no termina antes de que empiece'
-day_: 'Día'
+day_: Día
 day:
-    mon: 'Lun'
-    monday: 'Lunes'
-    tue: 'Mar'
-    tuesday: 'Martes'
-    wed: 'Mié'
-    wednesday: 'Miércoles'
-    thu: 'Jue'
-    thursday: 'Jueves'
-    fri: 'Vi'
-    friday: 'Viernes'
-    sat: 'Sáb'
-    saturday: 'Sábado'
-    sun: 'Dom'
-    sunday: 'Domingo'
+    mon: Lun
+    monday: Lunes
+    tue: Mar
+    tuesday: Martes
+    wed: Mié
+    wednesday: Miércoles
+    thu: Jue
+    thursday: Jueves
+    fri: Vi
+    friday: Viernes
+    sat: Sáb
+    saturday: Sábado
+    sun: Dom
+    sunday: Domingo
 date_agenda_display_format: MM-DD-YYYY
 date_agenda_display_format_for_form: MM-dd-yyyy
-end: 'Fin'
+end: Fin
 end_date: 'Fecha de finalización'
-error: 'Se ha producido un error inesperado, por favor intente de nuevo'
 export: 'Exportar eventos'
+error: 'Se ha producido un error inesperado, por favor intente de nuevo'
+event: Event
+filter_user: 'Filter by user'
+filter_ws: 'Filter by workspace'
+filter_tasks: 'Filter the tasks'
 form:
-    all_day: todo el dia
+    all_day: 'todo el dia'
     description: Descripción
-    end: Fecha de finalización
+    end: 'Fecha de finalización'
     task: Tâche
     priority: Prioridad
     priority_hight: Alta
-    start: Fecha de inicio
+    start: 'Fecha de inicio'
     title: Titulo
-    author: Creado por
-high: 'Alta'
-import_agenda_file: 'Importar'
-length: 'Duracón'
-low: 'Baja'
-medium: 'Media'
+    author: 'Creado por'
+    invitations: Invitations
+    status: Status
+high: Alta
+hide_tasks: 'Hide all the tasks'
+import_agenda_file: Importar
+invitation_to_an_event: 'Invitation à un évènement'
+invitation_not_found: 'L''invitation à l''évènement n''a pas été trouvé. Il a peut-être été modifié ou supprimé.'
+invitation_already_done: 'L''action demandée a déjà été appliquée à l''évènement. Aucune modification n''a été effectuée.'
+invitation_joined: 'L''invitation a bien été acceptée. Un nouvel évènement a été créé dans votre bureau. Vous pouvez ainsi voir qui participe également à cet évènement. Vous pouvez changer le titre et la description sans que les modifications ne se propagent chez les autres invités.'
+invitation_set_maybe: 'Vous avez bien marqué vous participerez peut-être à l''évènement. Cet évènement a été créé dans votre bureau. Vous pouvez ainsi voir qui participe également à cet évènement. Vous pouvez changer le titre et la description sans que les modifications ne se propagent chez les autres invités.'
+invitation_canceled: 'L''invitation a bien été supprimée. Aucun évènement n''a été créé dans votre agenda. Vous pouvez, à tout moment, modifier votre choix en cliquant sur les autres actions disponibles dans le message privé reçu.'
+invitation_back_to_calendar: 'Retourner sur le calendrier du bureau'
+invitation_guests: Invités
+invitation_ignore: 'Invitation pas encore acceptée'
+invitation_join: 'Invitation acceptée'
+invitation_maybe: 'L''utilisateur participera peut-être'
+invitation_resign: 'L''utilisateur ne participera pas'
+invitation_join_label: Participer
+invitation_maybe_label: Peut-être
+in_x_days: 'In %nbDays% days'
+isAllDay: 'All day'
+length: Duracón
+limit_date: 'Limit date'
+low: Baja
+medium: Media
+midnight: midnight
 modify: 'Modificar evento'
 month_: mes
 month:
-    jan: 'Ene'
-    january: 'Enero'
-    feb: 'Feb'
-    february: 'Febrero'
-    mar: 'Mar'
-    march: 'Marzo'
-    apr: 'Abr'
-    april: 'Abril'
-    may: 'Mayo'
-    jun: 'Jun'
-    june: 'Junio'
-    jul: 'Jul'
-    july: 'Julio'
-    aug: 'Ago'
-    august: 'Agosto'
-    sept: 'Sept'
-    september: 'Septiembre'
-    oct: 'Oct'
-    october: 'Octubre'
-    nov: 'Nov'
-    november: 'Noviembre'
-    dec: 'Dic'
-    december: 'Diciembre'
+    jan: Ene
+    january: Enero
+    feb: Feb
+    february: Febrero
+    mar: Mar
+    march: Marzo
+    apr: Abr
+    april: Abril
+    may: Mayo
+    jun: Jun
+    june: Junio
+    jul: Jul
+    july: Julio
+    aug: Ago
+    august: Agosto
+    sept: Sept
+    september: Septiembre
+    oct: Oct
+    october: Octubre
+    nov: Nov
+    november: Noviembre
+    dec: Dic
+    december: Diciembre
 next: '>'
 nextYear: '>>'
 no_event_found: 'Ningún evento encontrado'
 no_description: 'Sin descripción'
+no_task_found: 'No task found'
+no_filter_tasks: 'No filter'
+noon: noon
+now: Now
+no_task_now: 'No task to do'
 prev: '<'
 prevYear: '<<'
-remove_event: Eliminar un evento
-remove_event_confirm: ¿Está seguro que desea eliminar este evento?
+picker:
+    close: Fermer
+    go_to_today: 'Aujourd''hui'
+    locale: fr
+    select_month: 'Sélectionnez un mois'
+    prev_month: 'Mois précédent'
+    next_month: 'Mois suivant'
+    select_year: 'Sélectionnez une année'
+    prev_year: 'Année précédente'
+    next_year: 'Année suivante'
+    select_decade: 'Sélectionnez une décade'
+    prev_decade: 'Décade précédente'
+    next_decade: 'Décade suivante'
+    prev_century: 'Siècle précédent'
+    next_century: 'Siècle suivant'
+remove_event: 'Eliminar un evento'
+remove_event_confirm: '¿Está seguro que desea eliminar este evento?'
+send_message_content: 'Vous avez reçu une invitation à rejoindre un évènement de la part de %Sender%.<br> Cette évènement se déroule du %Start% au %End% avec comme description: %Description%.<br><a href="%JoinAction%" class="btn btn-success">Participer</a> <a href="%MaybeAction%" class="btn btn-primary">Peut-être</a> <a href="%ResignAction%" class="btn btn-danger">Ne participe pas</a>'
+send_message_object: 'Invitation à un évènement: %EventName%'
 start_date: 'Fecha de inicio'
-tasks: 'Tareas'
+show_task_only: 'Display only the tasks'
+task: Task
+task_done: 'Task done !'
+task_not_done: 'Task not done !'
+tasks: Tareas
 title: 'El título no puede estar vacío'
-today: 'Hoy'
-update: 'Modificar'
-update_event: Actualizar un evento
-week: 'semana'
+today: Hoy
+today_widget: Today
+tomorrow: Tomorrow
+type: Type
+update: Modificar
+update_event: 'Actualizar un evento'
+week: semana
 workspace: 'Espacio de trabajo'
