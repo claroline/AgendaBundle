@@ -1,7 +1,4 @@
-date_range_too_small: 'L''événement doit durer au moins 15 minutes.'
 agenda_: 'Upcoming events'
-agenda: Agenda
-invitation: Invitation
 agenda_task: 'Tasks to do'
 x_days_ago: '%nbDays% days ago'
 yesterday: Yesterday
