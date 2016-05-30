@@ -1,4 +1,10 @@
 # AgendaBundle
+
+WARNING
+-------
+
+**DEVELOPMENT HAS MOVED TO [claroline/Distribution](http://github.com/claroline/Distribution). THIS REPOSITORY IS NO LONGER MAINTAINED.**
+
 ## Synopsis
 This is a plugin for the platform Claroline.
 This plugin adds an agenda and two widgets which list the future events of the user and the tasks that are not done.
